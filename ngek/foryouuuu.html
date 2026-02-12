@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For you?💙</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #dff6ff, #ffffff);
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      overflow: hidden;
+      text-align: center;
+      position: relative;
+    }
+
+    .cloud {
+      position: absolute;
+      font-size: 60px;
+      opacity: 0.7;
+      animation: float 20s linear infinite;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 30px;
+      opacity: 0.7;
+      animation: floatHearts 12s linear infinite;
+    }
+
+    @keyframes float {
+      from { transform: translateX(-200px); }
+      to { transform: translateX(120vw); }
+    }
+
+    @keyframes floatHearts {
+      0% { transform: translateX(-200px) translateY(0); }
+      50% { transform: translateX(50vw) translateY(-100px); }
+      100% { transform: translateX(120vw) translateY(0); }
+    }
+
+    .falling-heart {
+      position: fixed;
+      top: -60px;
+      font-size: 35px;
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform;
+      animation: fallHearts linear forwards;
+    }
+
+    @keyframes fallHearts {
+      0% { transform: translate3d(0, 0, 0); opacity: 1; }
+      100% { transform: translate3d(0, 120vh, 0); opacity: 0; }
+    }
+
+    .falling-star {
+      position: fixed;
+      top: -60px;
+      font-size: 22px;
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform;
+      animation: fallStars linear forwards;
+      color: #6ec6ff;
+      text-shadow: 0 0 8px #6ec6ff;
+    }
+
+    @keyframes fallStars {
+      0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 1; }
+      100% { transform: translate3d(0, 120vh, 0) rotate(180deg); opacity: 0; }
+    }
+
+    .cat-left, .cat-right {
+      position: absolute;
+      top: 10%;
+      width: 200px;
+      height: 200px;
+    }
+
+    .cat-left { left: 20px; }
+    .cat-right { right: 20px; }
+
+    .cat-left-bottom, .cat-right-bottom {
+      position: absolute;
+      bottom: 10%;
+      width: 200px;
+      height: 200px;
+    }
+
+    .cat-left-bottom { left: 20%; }
+    .cat-right-bottom { right: 20%; }
+
+    .container {
+      background: #ffffffcc;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #6ec6ff;
+      margin-bottom: 30px;
+    }
+
+    img {
+      width: 150px;
+      height: auto;
+      margin-bottom: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      margin: 10px;
+    }
+
+    #yesBtn { background-color: #6ec6ff; color: white; }
+    #noBtn { background-color: #f0f0f0; color: #777; }
+
+    .celebrate {
+      font-size: 2.5rem;
+      color: #6ec6ff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="cloud" style="top:10%; animation-delay:0s;">☁️</div>
+<div class="cloud" style="top:30%; animation-delay:5s;">☁️</div>
+<div class="cloud" style="top:60%; animation-delay:10s;">☁️</div>
+
+<div class="heart" style="top:5%; animation-delay:0s;">💙</div>
+<div class="heart" style="top:20%; animation-delay:2s;">💙</div>
+<div class="heart" style="top:40%; animation-delay:4s;">💙</div>
+<div class="heart" style="top:60%; animation-delay:6s;">💙</div>
+<div class="heart" style="top:80%; animation-delay:8s;">💙</div>
+
+<img src="https://media.tenor.com/DnlpoXXpHxYAAAAi/heart-wings-cute.gif" class="cat-left">
+<img src="https://media.tenor.com/CVTgCJZK7OsAAAAi/blue-heart.gif" class="cat-right">
+
+<img src="https://media.tenor.com/EdVHk5t-CwEAAAAi/cinnamon-roll.gif" class="cat-left-bottom">
+<img src="https://media.tenor.com/QJ6Ks-R2lAYAAAAi/cinnamon-roll.gif" class="cat-right-bottom">
+
+<div class="container">
+  <img src="https://media.tenor.com/J8z8NMXcsM8AAAAm/cinnamoroll-gif.webp">
+  <h1 id="question">Will you be my valentines? 💙</h1>
+  <button id="yesBtn">Yes </button>
+  <button id="noBtn">No </button>
+</div>
+
+<script>
+function createFallingHearts() {
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'falling-heart';
+    heart.textContent = '💙';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 20 + 25) + 'px';
+    const duration = Math.random() * 2 + 5;
+    heart.style.animationDuration = duration + 's';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), duration * 1000 + 100);
+  }, 400);
+}
+createFallingHearts();
+
+function createFallingStars() {
+  setInterval(() => {
+    const star = document.createElement('div');
+    star.className = 'falling-star';
+    star.textContent = '★';
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.fontSize = (Math.random() * 12 + 14) + 'px';
+    const duration = Math.random() * 3 + 6;
+    star.style.animationDuration = duration + 's';
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), duration * 1000 + 100);
+  }, 250);
+}
+createFallingStars();
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const question = document.getElementById("question");
+
+let yesScale = 1;
+let noScale = 1;
+let noClicks = 0;
+
+const messages = [
+  { text: "Are you sure?", image: "https://media.tenor.com/NwdC14NHxRIAAAAi/cinnamoroll.gif" },
+  { text: "Are you really really sure?", image: "https://media.tenor.com/x0gRnFGetCYAAAAi/tea-cup-spin.gif" },
+  { text: "Really sure?", image: "https://i.pinimg.com/originals/f8/9a/17/f89a174e84375a5e584af5dc27b218e9.gif" },
+  { text: "I'll be sad☹️", image: "https://i.pinimg.com/736x/62/91/3f/62913f3471a09d0dfaaf030b641064c5.jpg" },
+  { text: "you have no other choice😈", image: "https://media.tenor.com/am86MJSZVUwAAAAi/hehe.gif" }
+];
+
+noBtn.addEventListener("click", () => {
+  noScale -= 0.12;
+  yesScale += 0.1100;
+
+  noBtn.style.transform = `scale(${noScale})`;
+  yesBtn.style.transform = `scale(${yesScale})`;
+
+  const existingImg = document.querySelector('.container img');
+  if (existingImg) existingImg.remove();
+
+  if (noClicks < messages.length) {
+    question.textContent = messages[noClicks].text;
+    if (messages[noClicks].image) {
+      const img = document.createElement("img");
+      img.src = messages[noClicks].image;
+      img.alt = "Image for " + messages[noClicks].text;
+      img.style.marginTop = "20px";
+      img.style.position = "relative";
+      img.style.top = "20px";
+      document.querySelector('.container').appendChild(img);
+    }
+    if (noClicks === messages.length - 1) noBtn.style.display = "none";
+    noClicks++;
+  }
+});
+
+yesBtn.addEventListener("click", () => {
+  // Play music only when celebrate appears
+  const music = new Audio("Bruno Major - Nothing (Lyric & Chord Video).mp3"); // Must be in same folder as HTML
+  music.loop = true;
+  music.play();
+
+  document.body.innerHTML = `
+    <div style="
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      background:linear-gradient(to bottom,#dff6ff,#ffffff);
+      font-family:'Comic Sans MS',cursive;
+      text-align:center;
+    ">
+      <img src="https://i.pinimg.com/originals/51/75/ab/5175ab5998091e5943a9c304e55e4a1a.gif" alt="Celebration GIF" style="width: 250px;">
+
+      <!-- Pixel Cats at the top -->
+      <img src="https://i.pinimg.com/originals/cf/ce/be/cfcebefa2a6eb7195a8c68582141a0db.gif" class="cat-left" alt="Pixel Cat Left">
+      <img src="https://media.tenor.com/uZPM-p8lnuYAAAAi/cute.gif" class="cat-right" alt="Pixel Cat Right">
+      <img src="https://i.pinimg.com/originals/fd/35/8c/fd358ca6ead2106007eb05e20322cd23.gif" 
+           style="position:absolute; bottom:27%; left:40px; width:500px;" 
+           alt="Pixel Cat Extra Right">
+
+      <!-- Pixel Cats at the bottom -->
+      <img src="https://media.tenor.com/koYE1iYbQ8QAAAAi/happy-sanrio.gif" class="cat-left-bottom" alt="Pixel Cat Left Bottom">
+      <img src="https://media.tenor.com/mJT8ouhb5aYAAAAi/cinnamoroll-sanrio.gif" class="cat-right-bottom" alt="Pixel Cat Right Bottom">
+      <img src="https://i.pinimg.com/originals/7f/b5/09/7fb50937dd87ba22f34849751bc0d4ee.gif" 
+           style="position:absolute; bottom:27%; right:40px; width:500px;" 
+           alt="Pixel Cat Extra Right">
+
+      <h1 class="celebrate">YEEEEEYYY!!! 💙</h1>
+      <p style="font-size:1.4rem; color:#6ec6ff;">
+        hehehehehe I knew you were gonna say yes💙
+      </p>
+
+      <img src="https://media.tenor.com/9A9NQV3RzSQAAAAi/meow-hs-meow-flowers.gif" alt="Meow GIF" style="width: 250px; margin-top: 20px;">
+    </div>
+  `;
+});
+</script>
+
+</body>
+</html>
